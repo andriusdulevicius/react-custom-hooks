@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { dbUrl } from './config';
+import { useState } from 'react';
 
 const useHttp = (requestConfig, successCallback) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const sendRequest = async (taskText) => {
+  const sendRequest = async () => {
     setIsLoading(true);
     setError(null);
     try {
       const response = await fetch(requestConfig.url, {
-        method: requestConfig.method,
-        body: JSON.stringify(requestConfig.body),
-        headers: requestConfig.headers,
+        method: requestConfig.method ? requestConfig.method : 'GET',
+        headers: requestConfig.headers || {},
+        body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
       });
 
       if (!response.ok) {
@@ -26,6 +25,8 @@ const useHttp = (requestConfig, successCallback) => {
     }
     setIsLoading(false);
   };
+
+  return { sendRequest, isLoading, error };
 };
 
 export default useHttp;
