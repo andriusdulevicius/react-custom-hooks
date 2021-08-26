@@ -11,6 +11,7 @@ const useCounter = () => {
       clearInterval(interval);
     };
   }, []);
+  return counter;
 };
 
 export default useCounter;
