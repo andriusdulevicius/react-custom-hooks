@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Card from './../UI/Card';
 
-const UpCounter = () => {
+const useCounter = () => {
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
@@ -12,13 +11,6 @@ const UpCounter = () => {
       clearInterval(interval);
     };
   }, []);
-
-  return (
-    <Card>
-      <h2>UpCounter</h2>
-      <h2>{counter}</h2>
-    </Card>
-  );
 };
 
-export default UpCounter;
+export default useCounter;
